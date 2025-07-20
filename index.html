@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+ <meta charset="UTF-8">
+ <title>Keys</title>
+ <link rel="stylesheet" href="https://public.codepenassets.com/css/normalize-5.0.0.min.css">
+ <style>
+   @layer normalize, base, demo, keys;
+
+   @layer keys {
+     #one {
+       .key__text {
+         color: hsl(214, 81%, 100%);
+         font-size: 18cqi;
+         svg {
+           width: 50%;
+           transform: scale(1.69);
+         }
+       }
+     }
+   }
+
+   @layer demo {
+     :root {
+       --travel: 20;
+     }
+     .keypad {
+       position: relative;
+       aspect-ratio: 400 / 310;
+       display: flex;
+       place-items: center;
+       width: clamp(280px, 45vw, 500px);
+       -webkit-tap-highlight-color: #0000;
+       transition-property: translate, transform;
+       transition-duration: 0.26s;
+       transition-timing-function: ease-out;
+       transform-style: preserve-3d;
+       scale: 1;
+
+       .key {
+         transform-style: preserve-3d;
+         border: 0;
+         background: #0000;
+         padding: 0;
+         cursor: pointer;
+         outline: none;
+
+         &[data-pressed='true'],
+         &:active {
+           .key__content {
+             translate: 0 calc(var(--travel) * 1%);
+           }
+         }
+       }
+
+       #one {
+         left: 13.5%;
+         bottom: 57.2%;
+       }
+
+       #two {
+         left: 25.8%;
+         bottom: 48.5%;
+       }
+
+       #three {
+         left: 38%;
+         bottom: 39.2%;
+       }
+
+       #four {
+         left: 50.4%;
+         bottom: 30.2%;
+       }
+
+       #five {
+         left: 62.7%;
+         bottom: 21%;
+         .key__text {
+           font-size: 24px;
+         }
+       }
+
+       .key__content {
+         width: 100%;
+         display: inline-block;
+         height: 100%;
+         transition: translate 0.12s ease-out;
+         container-type: inline-size;
+       }
+
+       .key__text {
+         width: 52%;
+         height: 62%;
+         position: absolute;
+         font-size: 20px;
+         z-index: 21;
+         top: 5%;
+         left: 0;
+         mix-blend-mode: normal;
+         color: hsl(0 0% 4%);
+         translate: 45% -16%;
+         transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg) rotate(0deg);
+         display: grid;
+         place-items: center;
+       }
+
+       .keypad__single {
+         position: absolute;
+         width: 21%;
+         left: 54%;
+         bottom: 36%;
+         height: 24%;
+         -webkit-clip-path: polygon(
+           0 0,
+           54% 0,
+           89% 24%,
+           100% 70%,
+           54% 100%,
+           46% 100%,
+           0 69%,
+           12% 23%,
+           47% 0%
+         );
+                 clip-path: polygon(
+           0 0,
+           54% 0,
+           89% 24%,
+           100% 70%,
+           54% 100%,
+           46% 100%,
+           0 69%,
+           12% 23%,
+           47% 0%
+         );
+         -webkit-mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86)
+           50% 50% / 100% 100%;
+                 mask: url(https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86)
+           50% 50% / 100% 100%;
+
+         img {
+           --brightness: 2;
+           --saturate: 0;
+           top: 0;
+           opacity: 1;
+           width: 96%;
+           position: absolute;
+           left: 50%;
+           translate: -50% 1%;
+         }
+       }
+
+       .key__mask {
+         width: 100%;
+         height: 100%;
+         display: inline-block;
+       }
+
+       .key img {
+         filter: hue-rotate(calc(var(--hue, 0) * 1deg))
+           saturate(var(--saturate, 1)) brightness(var(--brightness, 1));
+       }
+
+       .keypad__base {
+         position: absolute;
+         bottom: 0;
+         width: 100%;
+       }
+       img {
+         width: 100%;
+       }
+     }
+   }
+
+   @layer base {
+     :root {
+       --font-size-min: 16;
+       --font-size-max: 20;
+       --font-ratio-min: 1.2;
+       --font-ratio-max: 1.33;
+       --font-width-min: 375;
+       --font-width-max: 1500;
+     }
+
+     html {
+       color-scheme: light dark;
+     }
+
+     [data-theme='light'] {
+       color-scheme: light only;
+     }
+
+     [data-theme='dark'] {
+       color-scheme: dark only;
+     }
+
+     :where(.fluid) {
+       --fluid-min: calc(
+         var(--font-size-min) * pow(var(--font-ratio-min), var(--font-level, 0))
+       );
+       --fluid-max: calc(
+         var(--font-size-max) * pow(var(--font-ratio-max), var(--font-level, 0))
+       );
+       --fluid-preferred: calc(
+         (var(--fluid-max) - var(--fluid-min)) /
+           (var(--font-width-max) - var(--font-width-min))
+       );
+       --fluid-type: clamp(
+         (var(--fluid-min) / 16) * 1rem,
+         ((var(--fluid-min) / 16) * 1rem) -
+           (((var(--fluid-preferred) * var(--font-width-min)) / 16) * 1rem) +
+           (var(--fluid-preferred) * var(--variable-unit, 100vi)),
+         (var(--fluid-max) / 16) * 1rem
+       );
+       font-size: var(--fluid-type);
+     }
+
+     *,
+     *:after,
+     *:before {
+       box-sizing: border-box;
+     }
+
+     body {
+       background: light-dark(#fff, #000);
+       display: grid;
+       place-items: center;
+       min-height: 100vh;
+       overflow: hidden;
+     }
+     
+     main {
+       transform: translateY(150px) rotate(-30deg);
+     }
+
+     body::before {
+       --size: 45px;
+       --line: color-mix(in hsl, canvasText, transparent 80%);
+       content: '';
+       height: 100vh;
+       width: 100vw;
+       position: fixed;
+       background: linear-gradient(
+             90deg,
+             var(--line) 1px,
+             transparent 1px var(--size)
+           )
+           calc(var(--size) * 0.36) 50% / var(--size) var(--size),
+         linear-gradient(var(--line) 1px, transparent 1px var(--size)) 0%
+           calc(var(--size) * 0.32) / var(--size) var(--size);
+       -webkit-mask: linear-gradient(-20deg, transparent 50%, white);
+               mask: linear-gradient(-20deg, transparent 50%, white);
+       top: 0;
+       transform-style: flat;
+       pointer-events: none;
+       z-index: -1;
+     }
+
+     .sr-only {
+       position: absolute;
+       width: 1px;
+       height: 1px;
+       padding: 0;
+       margin: -1px;
+       overflow: hidden;
+       clip: rect(0, 0, 0, 0);
+       white-space: nowrap;
+       border-width: 0;
+     }
+   }
+ </style>
+</head>
+<body>
+<main>
+    <div class="keypad">
+      <div class="keypad__base">
+        <img
+          src="https://assets.codepen.io/605876/ai-base.png?format=auto&quality=86"
+          alt=""
+        />
+      </div>
+      <button id="one" class="key keypad__single">
+        <span class="key__mask">
+          <span class="key__content">
+            <span class="key__text">
+              <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint0_radial_5_16341)"/>
+<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint1_radial_5_16341)"/>
+<rect x="2" y="2" width="28" height="28" rx="6" fill="url(#paint2_radial_5_16341)"/>
+<path d="M23 10.5C23 11.3284 22.3284 12 21.5 12C20.6716 12 20 11.3284 20 10.5C20 9.67157 20.6716 9 21.5 9C22.3284 9 23 9.67157 23 10.5Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M16 21C18.7614 21 21 18.7614 21 16C21 13.2386 18.7614 11 16 11C13.2386 11 11 13.2386 11 16C11 18.7614 13.2386 21 16 21ZM16 19C17.6569 19 19 17.6569 19 16C19 14.3431 17.6569 13 16 13C14.3431 13 13 14.3431 13 16C13 17.6569 14.3431 19 16 19Z" fill="white"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M6 15.6C6 12.2397 6 10.5595 6.65396 9.27606C7.2292 8.14708 8.14708 7.2292 9.27606 6.65396C10.5595 6 12.2397 6 15.6 6H16.4C19.7603 6 21.4405 6 22.7239 6.65396C23.8529 7.2292 24.7708 8.14708 25.346 9.27606C26 10.5595 26 12.2397 26 15.6V16.4C26 19.7603 26 21.4405 25.346 22.7239C24.7708 23.8529 23.8529 24.7708 22.7239 25.346C21.4405 26 19.7603 26 16.4 26H15.6C12.2397 26 10.5595 26 9.27606 25.346C8.14708 24.7708 7.2292 23.8529 6.65396 22.7239C6 21.4405 6 19.7603 6 16.4V15.6ZM15.6 8H16.4C18.1132 8 19.2777 8.00156 20.1779 8.0751C21.0548 8.14674 21.5032 8.27659 21.816 8.43597C22.5686 8.81947 23.1805 9.43139 23.564 10.184C23.7234 10.4968 23.8533 10.9452 23.9249 11.8221C23.9984 12.7223 24 13.8868 24 15.6V16.4C24 18.1132 23.9984 19.2777 23.9249 20.1779C23.8533 21.0548 23.7234 21.5032 23.564 21.816C23.1805 22.5686 22.5686 23.1805 21.816 23.564C21.5032 23.7234 21.0548 23.8533 20.1779 23.9249C19.2777 23.9984 18.1132 24 16.4 24H15.6C13.8868 24 12.7223 23.9984 11.8221 23.9249C10.9452 23.8533 10.4968 23.7234 10.184 23.564C9.43139 23.1805 8.81947 22.5686 8.43597 21.816C8.27659 21.5032 8.14674 21.0548 8.0751 20.1779C8.00156 19.2777 8 18.1132 8 16.4V15.6C8 13.8868 8.00156 12.7223 8.0751 11.8221C8.14674 10.9452 8.27659 10.4968 8.43597 10.184C8.81947 9.43139 9.43139 8.81947 10.184 8.43597C10.4968 8.27659 10.9452 8.14674 11.8221 8.0751C12.7223 8.00156 13.8868 8 15.6 8Z" fill="white"/>
+<defs>
+<radialGradient id="paint0_radial_5_16341" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(12 23) rotate(-55.3758) scale(25.5196)">
+<stop stop-color="#B13589"/>
+<stop offset="0.79309" stop-color="#C62F94"/>
+<stop offset="1" stop-color="#8A3AC8"/>
+</radialGradient>
+<radialGradient id="paint1_radial_5_16341" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(11 31) rotate(-65.1363) scale(22.5942)">
+<stop stop-color="#E0E8B7"/>
+<stop offset="0.444662" stop-color="#FB8A2E"/>
+<stop offset="0.71474" stop-color="#E2425C"/>
+<stop offset="1" stop-color="#E2425C" stop-opacity="0"/>
+</radialGradient>
+<radialGradient id="paint2_radial_5_16341" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(0.500002 3) rotate(-8.1301) scale(38.8909 8.31836)">
+<stop offset="0.156701" stop-color="#406ADC"/>
+<stop offset="0.467799" stop-color="#6A45BE"/>
+<stop offset="1" stop-color="#6A45BE" stop-opacity="0"/>
+</radialGradient>
+</defs>
+</svg>
+            </span>
+            <img
+              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              alt=""
+            />
+          </span>
+        </span>
+      </button>
+      <button id="two" class="key keypad__single">
+        <span class="key__mask">
+          <span class="key__content">
+            <span class="key__text">B</span>
+            <img
+              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              alt=""
+            />
+          </span>
+        </span>
+      </button>
+      <button id="three" class="key keypad__single">
+        <span class="key__mask">
+          <span class="key__content">
+            <span class="key__text">S</span>
+            <img
+              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              alt=""
+            />
+          </span>
+        </span>
+      </button>
+      <button id="four" class="key keypad__single">
+        <span class="key__mask">
+          <span class="key__content">
+            <span class="key__text">N</span>
+            <img
+              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              alt=""
+            />
+          </span>
+        </span>
+      </button>
+      <button id="five" class="key keypad__single">
+        <span class="key__mask">
+          <span class="key__content">
+            <span class="key__text">🪷</span>
+            <img
+              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              alt=""
+            />
+          </span>
+        </span>
+      </button>
+    </div>
+  </main>
+<script type="module">
+  const config = {
+    theme: 'dark',
+    muted: false,
+    one: {
+      travel: 26,
+      key: 'Meta',
+      hue: 330,
+      saturation: 0.4,
+      brightness: 1.4,
+      buttonElement: document.querySelector('#one'),
+      textElement: document.querySelector('#one .key__text')
+    },
+    two: {
+      travel: 26,
+      key: 'Tab',
+      hue: 0,
+      saturation: 0,
+      brightness: 1.4,
+      buttonElement: document.querySelector('#two'),
+      textElement: document.querySelector('#two .key__text')
+    },
+    three: {
+      travel: 18,
+      key: 'c',
+      hue: 0,
+      saturation: 0,
+      brightness: 0.4,
+      buttonElement: document.querySelector('#three'),
+      textElement: document.querySelector('#three .key__text')
+    },
+    four: {
+      travel: 18,
+      key: 'v',
+      hue: 0,
+      saturation: 0,
+      brightness: 0.4,
+      buttonElement: document.querySelector('#four'),
+      textElement: document.querySelector('#four .key__text')
+    },
+    five: {
+      travel: 18,
+      key: 'Escape',
+      hue: 0,
+      saturation: 0,
+      brightness: 0.4,
+      buttonElement: document.querySelector('#five'),
+      textElement: document.querySelector('#five .key__text')
+    }
+  };
+
+  const backgroundImages = [
+    "https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/1.jpg",
+    "https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/2.jpg",
+    "https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/3.jpg",
+    "https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/4.jpg"
+  ];
+  let currentImageIndex = -1; // Начинаем с -1, чтобы первое нажатие переключило на первую картинку (индекс 0)
+
+  const clickAudio = new Audio(
+  'https://cdn.freesound.org/previews/378/378085_6260145-lq.mp3');
+
+  clickAudio.muted = config.muted;
+
+  const update = () => {
+    document.documentElement.dataset.theme = config.theme;
+  };
+
+  const ids = ['one', 'two', 'three', 'four', 'five'];
+  for (const id of ids) {
+    config[id].buttonElement.style.setProperty('--travel', config[id].travel);
+    config[id].buttonElement.style.setProperty(
+    '--saturate',
+    config[id].saturation);
+
+    config[id].buttonElement.style.setProperty('--hue', config[id].hue);
+    config[id].buttonElement.style.setProperty(
+    '--brightness',
+    config[id].brightness);
+
+    config[id].buttonElement.addEventListener('pointerdown', () => {
+      if (!config.muted) {
+        clickAudio.currentTime = 0;
+        clickAudio.play().catch(error => {
+          console.error('Ошибка воспроизведения звука:', error);
+        });
+      }
+
+      if (id === 'one') {
+        const body = document.body;
+        currentImageIndex = (currentImageIndex + 1) % (backgroundImages.length + 1);
+
+        if (currentImageIndex < backgroundImages.length) {
+          body.style.backgroundImage = `url(${backgroundImages[currentImageIndex]})`;
+          body.style.backgroundSize = 'cover';
+          body.style.backgroundPosition = 'center';
+          body.style.backgroundRepeat = 'no-repeat';
+        } else {
+          body.style.backgroundImage = '';
+          body.style.backgroundSize = '';
+          body.style.backgroundPosition = '';
+          body.style.backgroundRepeat = '';
+        }
+      }
+    });
+  }
+
+  window.addEventListener('keydown', event => {
+    for (const id of ids) {
+      if (event.key === config[id].key) {
+        config[id].buttonElement.dataset.pressed = true;
+        if (!config.muted) {
+          clickAudio.currentTime = 0;
+          clickAudio.play().catch(error => {
+            console.error('Ошибка воспроизведения звука при keydown:', error);
+          });
+        }
+      }
+    }
+  });
+  
+  window.addEventListener('keyup', event => {
+    for (const id of ids) {
+      if (event.key === config[id].key || event.key === 'Meta')
+      config[id].buttonElement.dataset.pressed = false;
+    }
+  });
+
+  update();
+</script>
+</body>
+</html>
