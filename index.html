@@ -98,7 +98,7 @@
          top: 5%;
          left: 0;
          mix-blend-mode: normal;
-         color: hsl(0 0% 4%);
+         color: hsl(0 0% 4%); /* Этот цвет применяется к текстовым клавишам (B, S, N, 🪷) */
          translate: 45% -16%;
          transform: rotateX(36deg) rotateY(45deg) rotateX(-90deg) rotate(0deg);
          display: grid;
@@ -139,8 +139,8 @@
            50% 50% / 100% 100%;
 
          img {
-           --brightness: 2;
-           --saturate: 0;
+           /* --brightness: 2; */
+           /* --saturate: 0;   */
            top: 0;
            opacity: 1;
            width: 96%;
@@ -275,7 +275,7 @@
     <div class="keypad">
       <div class="keypad__base">
         <img
-          src="https://assets.codepen.io/605876/ai-base.png?format=auto&quality=86"
+          src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/ai-base.png"
           alt=""
         />
       </div>
@@ -311,7 +311,7 @@
 </svg>
             </span>
             <img
-              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/keypad-single.png"
               alt=""
             />
           </span>
@@ -322,7 +322,7 @@
           <span class="key__content">
             <span class="key__text">B</span>
             <img
-              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/keypad-single.png"
               alt=""
             />
           </span>
@@ -333,7 +333,7 @@
           <span class="key__content">
             <span class="key__text">S</span>
             <img
-              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/keypad-single.png"
               alt=""
             />
           </span>
@@ -344,7 +344,7 @@
           <span class="key__content">
             <span class="key__text">N</span>
             <img
-              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/keypad-single.png"
               alt=""
             />
           </span>
@@ -355,7 +355,7 @@
           <span class="key__content">
             <span class="key__text">🪷</span>
             <img
-              src="https://assets.codepen.io/605876/keypad-single.png?format=auto&quality=86"
+              src="https://raw.githubusercontent.com/0x2171/KeyCupsArt/refs/heads/main/keypad-single.png"
               alt=""
             />
           </span>
@@ -370,9 +370,9 @@
     one: {
       travel: 26,
       key: 'Meta',
-      hue: 330,
-      saturation: 0.4,
-      brightness: 1.4,
+      hue: 0,
+      saturation: 1,
+      brightness: 1,
       buttonElement: document.querySelector('#one'),
       textElement: document.querySelector('#one .key__text')
     },
@@ -381,7 +381,7 @@
       key: 'Tab',
       hue: 0,
       saturation: 0,
-      brightness: 1.4,
+      brightness: 2,
       buttonElement: document.querySelector('#two'),
       textElement: document.querySelector('#two .key__text')
     },
@@ -390,7 +390,7 @@
       key: 'c',
       hue: 0,
       saturation: 0,
-      brightness: 0.4,
+      brightness: 2,
       buttonElement: document.querySelector('#three'),
       textElement: document.querySelector('#three .key__text')
     },
@@ -399,7 +399,7 @@
       key: 'v',
       hue: 0,
       saturation: 0,
-      brightness: 0.4,
+      brightness: 2,
       buttonElement: document.querySelector('#four'),
       textElement: document.querySelector('#four .key__text')
     },
@@ -408,7 +408,7 @@
       key: 'Escape',
       hue: 0,
       saturation: 0,
-      brightness: 0.4,
+      brightness: 2,
       buttonElement: document.querySelector('#five'),
       textElement: document.querySelector('#five .key__text')
     }
